@@ -1,5 +1,15 @@
 <?php
 
+if (isset($_REQUEST["login"])) {
+
+    $_SESSION["paginaAnterior"] = $_SESSION["paginaEnCurso"];
+    $_SESSION["paginaEnCurso"] = "login";
+
+    // Redirigimos
+    header("Location: ");
+    exit;
+}
+
 $titulo = "Inicio Publico";
 
 require_once $vista["layout"];
