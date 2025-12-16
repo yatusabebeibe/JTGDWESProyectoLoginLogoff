@@ -1,5 +1,9 @@
 <?php
 
+/** @author Jesús Temprano Gallego
+ *  @since 16/12/2025
+ */
+
 $controlador = [
     "inicioPublico" => "controller/cInicioPublico.php",
     "login" => "controller/cLogin.php"

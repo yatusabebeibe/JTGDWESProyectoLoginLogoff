@@ -1,5 +1,9 @@
 <?php
 
+/** @author Jesús Temprano Gallego
+ *  @since 16/12/2025
+ */
+
 require_once("./config/confAPP.php");
 require_once("./config/confDB.php");
 

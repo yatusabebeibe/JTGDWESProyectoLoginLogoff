@@ -1,5 +1,9 @@
 <?php
 
+/** @author Jesús Temprano Gallego
+ *  @since 16/12/2025
+ */
+
 // Comprobamos si se ha enviado un idioma por formulario
 if (!empty($_REQUEST["idioma"])) {
 

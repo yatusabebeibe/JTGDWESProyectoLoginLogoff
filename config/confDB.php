@@ -1,5 +1,9 @@
 <?php
 
+/** @author Jesús Temprano Gallego
+ *  @since 16/12/2025
+ */
+
 /*  Constantes para la conexión con la DB.
     Existen tanto `define()` como `const` y se pueden usar igual en la mayoría de casos.
     En esta pagina web explican las diferencias y en que casos se usa uno u otro:
