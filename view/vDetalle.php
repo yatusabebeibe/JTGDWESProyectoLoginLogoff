@@ -40,3 +40,4 @@
             echo "<div>".phpinfo()."</div>";
         ?>
 </div>
+<style>body{background: var(--color-bg-body);} a:link{color: var(--color-primary); text-decoration: unset; background-color: unset;}</style>
