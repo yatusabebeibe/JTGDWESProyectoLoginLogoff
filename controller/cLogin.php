@@ -7,7 +7,7 @@ if (isset($_REQUEST["cancelar"])) {
     $_SESSION["paginaEnCurso"] = "inicioPublico";
 
     // Redirigimos
-    header("Location: ");
+    header("Location: index.php");
     exit;
 }
 

@@ -6,7 +6,7 @@ if (isset($_REQUEST["login"])) {
     $_SESSION["paginaEnCurso"] = "login";
 
     // Redirigimos
-    header("Location: ");
+    header("Location: index.php");
     exit;
 }
 
