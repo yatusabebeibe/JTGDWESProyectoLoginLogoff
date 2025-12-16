@@ -31,7 +31,10 @@ if (empty($_COOKIE["idioma"])) {
 <head>
     <meta charset="UTF-8">
     <title>Steam Inspirado - Inicio</title>
-    <link rel="stylesheet" href="./webroot/style.css">
+    <link rel="stylesheet" href="./webroot/css/style.css">
+    <?php if ($_SESSION["paginaEnCurso"] === "login"): ?>
+    <link rel="stylesheet" href="./webroot/css/login.css">
+    <?php endif; ?>
 </head>
 <body>
     <header>
@@ -48,9 +51,11 @@ if (empty($_COOKIE["idioma"])) {
                 <input type="radio" name="idioma" id="JP" value="JP" <?=  $_COOKIE["idioma"]=="JP" ? "checked" : "" ?>>
                 <label for="JP"><img src="./webroot/images/flags/JP.png" alt="Japonés"></label>
             </form>
+            <?php if ( $_SESSION["paginaEnCurso"] == "inicioPublico" ): ?>
             <form id="login" action="" method="post">
                 <input type="submit" value="Iniciar sesión" name="login">
             </form>
+            <?php endif; ?>
         </div>
     </header>
 
@@ -60,7 +65,7 @@ if (empty($_COOKIE["idioma"])) {
 
     <footer>
         <a href="https://github.com/yatusabebeibe/JTGDWESProyectoLoginLogoff/" target="_blank">
-            <img src="./webroot/images/github.svg">
+            <img src="./webroot/images/github.svg" style="filter: invert(1);">
         </a>
         <p><a href="../../" target="_self">Jesús Temprano Gallego</a> | <a href="https://store.steampowered.com/" target="_blank">Pagina imitada</a> | 16/12/2025</p>
     </footer>
