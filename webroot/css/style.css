@@ -80,6 +80,7 @@ header .logo {
 /* Botón de login */
 #login input[type="submit"] {
     padding: 8px 16px;
+    margin: 0;
     border: none;
     border-radius: var(--border-radius);
     background: var(--color-primary);

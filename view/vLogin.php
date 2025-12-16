@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="./webroot/css/login.css">
 <div class="hero-text">
     <h1>Bienvenido a Login</h1>
     <form action=<?php echo $_SERVER["PHP_SELF"];?> method="post">
