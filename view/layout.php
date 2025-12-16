@@ -30,7 +30,8 @@ if (empty($_COOKIE["idioma"])) {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Steam Inspirado - Inicio</title>
+    <link rel="icon" type="image/svg+xml" href="./webroot/images/logo.svg">
+    <title>Jesús Temprano Gallego - <?= $titulo ?></title>
     <link rel="stylesheet" href="./webroot/css/style.css">
     <?php if ($_SESSION["paginaEnCurso"] === "login"): ?>
     <link rel="stylesheet" href="./webroot/css/login.css">
