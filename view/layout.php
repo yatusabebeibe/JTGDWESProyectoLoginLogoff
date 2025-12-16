@@ -51,9 +51,13 @@ if (empty($_COOKIE["idioma"])) {
                 <input type="radio" name="idioma" id="JP" value="JP" <?=  $_COOKIE["idioma"]=="JP" ? "checked" : "" ?>>
                 <label for="JP"><img src="./webroot/images/flags/JP.png" alt="Japonés"></label>
             </form>
-            <?php if ( $_SESSION["paginaEnCurso"] == "inicioPublico" ): ?>
+            <?php if ( $_SESSION["paginaEnCurso"] != "login" ): ?>
             <form id="login" action="" method="post">
+                <?php if ( $_SESSION["paginaEnCurso"] == "inicioPublico" ): ?>
                 <input type="submit" value="Iniciar sesión" name="login">
+                <?php else: ?>
+                <input type="submit" value="Cerrar sesión" name="logoff">
+                <?php endif; ?>
             </form>
             <?php endif; ?>
         </div>
