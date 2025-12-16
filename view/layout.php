@@ -44,7 +44,7 @@ if (empty($_COOKIE["idioma"])) {
                 <input type="radio" name="idioma" id="JP" value="JP" <?=  $_COOKIE["idioma"]=="JP" ? "checked" : "" ?>>
                 <label for="JP"><img src="./webroot/images/flags/JP.png" alt="Japonés"></label>
             </form>
-            <form id="login" action="#" method="post">
+            <form id="login" action="" method="post">
                 <input type="submit" value="Iniciar sesión" name="login">
             </form>
         </div>
@@ -58,7 +58,7 @@ if (empty($_COOKIE["idioma"])) {
         <a href="https://github.com/yatusabebeibe/JTGDWESProyectoLoginLogoff/" target="_blank">
             <img src="./webroot/images/github.svg">
         </a>
-        <p><a href="../../" target="_self">Jesús Temprano Gallego</a> | 20/11/2025</p>
+        <p><a href="../../" target="_self">Jesús Temprano Gallego</a> | <a href="https://store.steampowered.com/" target="_blank">Pagina imitada</a> | 16/12/2025</p>
     </footer>
 </body>
 </html>
