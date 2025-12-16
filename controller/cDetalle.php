@@ -13,16 +13,17 @@ if (isset($_REQUEST["logoff"])) {
     header("Location: index.php");
     exit;
 }
-if (isset($_REQUEST["detalle"])) {
 
-    $_SESSION["paginaAnterior"] = $_SESSION["paginaEnCurso"];
-    $_SESSION["paginaEnCurso"] = "detalle";
+if (isset($_REQUEST["volver"])) {
+
+    $_SESSION["paginaEnCurso"] = $_SESSION["paginaAnterior"];
+    $_SESSION["paginaAnterior"] = "detalle";
 
     // Redirigimos
     header("Location: index.php");
     exit;
 }
 
-$titulo = "Inicio Privado";
+$titulo = "Detalle";
 
 require_once $vista["layout"];

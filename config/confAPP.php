@@ -8,6 +8,7 @@ $controlador = [
     "inicioPublico" => "controller/cInicioPublico.php",
     "login" => "controller/cLogin.php",
     "inicioPrivado" => "controller/cInicioPrivado.php",
+    "detalle" => "controller/cDetalle.php",
 ];
 
 $vista = [
@@ -15,4 +16,5 @@ $vista = [
     "inicioPublico" => "view/vInicioPublico.php",
     "login" => "view/vLogin.php",
     "inicioPrivado" => "view/vInicioPrivado.php",
+    "detalle" => "view/vDetalle.php",
 ];
