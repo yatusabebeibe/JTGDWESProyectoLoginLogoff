@@ -17,6 +17,14 @@
             </form>
         </div>
     </header>
+    <script>
+        const header = document.querySelector("header");
+        const posicionInicial  = header.offsetTop;
+
+        window.addEventListener("scroll", () => {
+            header.classList.toggle("desacoplado", window.scrollY > posicionInicial);
+        });
+    </script>
 
     <main>
         <?php require_once $vista[$_SESSION["paginaEnCurso"]]; ?>

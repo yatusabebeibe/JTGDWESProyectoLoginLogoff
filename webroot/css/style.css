@@ -17,6 +17,9 @@
     --github-icon-size: 24px;
     --border-radius: 5px;
     --transition-speed: 0.3s;
+
+    --header-height: 68px;
+    --footer-height: 58.5px;
 }
 
 /* Reset básico */
@@ -40,6 +43,11 @@ header {
     align-items: center;
     padding: var(--header-padding);
     background: var(--color-bg-header);
+    backdrop-filter: blur(10px);
+    transition: all .75s linear;
+}
+.desacoplado {
+  background: color-mix(in srgb, var(--color-bg-header) 90%, transparent 10%);
 }
 header .logo {
     font-size: var(--logo-font-size);
@@ -99,7 +107,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: calc(100vh - 68px - 58.5px);
+    min-height: calc(100vh - var(--header-height) - var(--footer-height));
     text-align: center;
 }
 .hero-text h1 {
