@@ -13,7 +13,7 @@ class UsuarioPDO {
      *
      * @param string $codUsuario Código del usuario a validar.
      * @param string $passwd Contraseña del usuario.
-     * @return array|null Devuelve los datos del usuario si son correctos, o null si no existen.
+     * @return bool Devuelve si el usuario es valido o no.
      */
     public static function validarUsuario(string $codUsuario, string $passwd) {
         $consulta = <<<CONSULTA
@@ -29,7 +29,27 @@ class UsuarioPDO {
             ":contrasenia" => $codUsuario.$passwd ?? ""
         ];
 
-        return DBPDO::ejecutarConsulta($consulta,$parametros);
+        $datos = DBPDO::ejecutarConsulta($consulta,$parametros);
+
+        $usuario = null;
+        if ($datos->rowCount() >= 1) {
+            $datos = $datos->fetchObject();
+            $usuario = new Usuario(
+                $datos->{aColumnasUsuario["Codigo"]},
+                $datos->{aColumnasUsuario["Password"]},
+                $datos->{aColumnasUsuario["Descripcion"]},
+                $datos->{aColumnasUsuario["NumConexiones"]} + 1,
+                $datos->{aColumnasUsuario["UltimaConexion"]} ? new DateTime($datos->{aColumnasUsuario["UltimaConexion"]}) : null,
+                new DateTime(),
+                $datos->{aColumnasUsuario["Perfil"]}
+            );
+
+            // Guardamos el usuario en la sesión
+            $_SESSION["usuarioDAWJTGProyectoLoginLogoffTema5"] = $usuario;
+        }
+
+        return isset($usuario);
+    }
     }
 
     // public static function x() {}
