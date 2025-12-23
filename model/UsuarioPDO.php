@@ -50,6 +50,24 @@ class UsuarioPDO {
 
         return isset($usuario);
     }
+
+    public static function actualizarUltimaConexion(string $codUsuario, DateTime $fecha) {
+        $consulta = <<<CONSULTA
+        UPDATE T01_Usuario
+        SET
+            T01_FechaHoraUltimaConexion = :fecha,
+            T01_NumConexiones = T01_NumConexiones + 1
+        WHERE T01_CodUsuario = :usuario ;
+        CONSULTA;
+
+        $parametros = [
+            ":usuario" => $codUsuario ?? "",
+            ":fecha" => $fecha
+        ];
+
+        $actualizacion = DBPDO::ejecutarConsulta($consulta, $parametros);
+
+        return ($actualizacion && $actualizacion->rowCount() > 0) ? true : false ;
     }
 
     // public static function x() {}
