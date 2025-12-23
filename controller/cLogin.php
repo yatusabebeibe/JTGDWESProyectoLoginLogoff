@@ -4,6 +4,8 @@
  *  @since 16/12/2025
  */
 
+require_once __DIR__ . '/../model/UsuarioPDO.php';
+
 // Comprobamos si se ha pulsado el botón 'cancelar'
 if (isset($_REQUEST["cancelar"])) {
 
@@ -14,15 +16,27 @@ if (isset($_REQUEST["cancelar"])) {
     header("Location: index.php");
     exit;
 }
+
+$encontrado = false; // Variable que indicará si se ha encontrado el usuario
+$aRespuestas = ["usuario"=>"","contraseña"=>""]; // Array para almacenar los datos del usuario
+$aErrores = ["login"=>""]; // Array para almacenar el mensaje errores en el login
+
 // Comprobamos si se ha pulsado el botón 'entrar'
 if (isset($_REQUEST["entrar"])) {
 
-    $_SESSION["paginaAnterior"] = $_SESSION["paginaEnCurso"];
-    $_SESSION["paginaEnCurso"] = "inicioPrivado";
+    $aRespuestas["usuario"] = $_REQUEST["usuario"];
+    $aRespuestas["contraseña"] = $_REQUEST["contraseña"];
 
-    // Redirigimos
-    header("Location: index.php");
-    exit;
+    $usuarioValido = UsuarioPDO::validarUsuario($aRespuestas["usuario"],$aRespuestas["contraseña"]);
+
+    if ($usuarioValido) {
+        $_SESSION["paginaAnterior"] = $_SESSION["paginaEnCurso"];
+        $_SESSION["paginaEnCurso"] = "inicioPrivado";
+
+        // Redirigimos
+        header("Location: index.php");
+        exit;
+    }
 }
 
 // Comprobamos si se ha enviado un idioma por formulario
