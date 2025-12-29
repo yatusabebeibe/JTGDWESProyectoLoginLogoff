@@ -166,3 +166,14 @@ footer p {
     margin: 0;
     font-size: 0.9em;
 }
+
+
+
+.imagenesInicio {
+    display: flex;
+    gap: 15px;
+
+    &> img {
+        height: 500px;
+    }
+}
