@@ -12,7 +12,7 @@ class Usuario {
     private string $descUsuario;
     private int $numAccesos;
     private DateTime $fechaHoraUltimaConexion;
-    private DateTime $fechaHoraUltimaConexionAnterior;
+    private ?DateTime $fechaHoraUltimaConexionAnterior;
     private string $perfil;
 
     /**
@@ -23,7 +23,7 @@ class Usuario {
      * @param string $descUsuario
      * @param int $numAccesos
      * @param DateTime $fechaHoraUltimaConexion
-     * @param DateTime $fechaHoraUltimaConexionAnterior
+     * @param ?DateTime $fechaHoraUltimaConexionAnterior
      * @param string $perfil
      */
     public function __construct(
@@ -32,7 +32,7 @@ class Usuario {
         string $descUsuario,
         int $numAccesos,
         DateTime $fechaHoraUltimaConexion,
-        DateTime $fechaHoraUltimaConexionAnterior,
+        ?DateTime $fechaHoraUltimaConexionAnterior,
         string $perfil
     ) {
         $this->codUsuario = $codUsuario;

@@ -35,15 +35,15 @@ class UsuarioPDO {
         $datos = DBPDO::ejecutarConsulta($consulta,$parametros);
 
         $usuario = null;
-        if ($datos->rowCount() >= 1) {
+        if ($datos && $datos->rowCount() >= 1) {
             $datos = $datos->fetchObject();
             $usuario = new Usuario(
                 $datos->{aColumnasUsuario["Codigo"]},
                 $datos->{aColumnasUsuario["Password"]},
                 $datos->{aColumnasUsuario["Descripcion"]},
                 $datos->{aColumnasUsuario["NumConexiones"]} + 1,
-                $datos->{aColumnasUsuario["UltimaConexion"]} ? new DateTime($datos->{aColumnasUsuario["UltimaConexion"]}) : null,
                 new DateTime(),
+                $datos->{aColumnasUsuario["UltimaConexion"]} ? new DateTime($datos->{aColumnasUsuario["UltimaConexion"]}) : null,
                 $datos->{aColumnasUsuario["Perfil"]}
             );
 
