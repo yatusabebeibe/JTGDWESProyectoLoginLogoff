@@ -10,7 +10,7 @@ if (isset($_REQUEST["logoff"])) {
     $_SESSION["paginaEnCurso"] = "inicioPublico";
 
     // Redirigimos
-    header("Location: index.php");
+    header("Location: indexLoginLogoff.php");
     exit;
 }
 if (isset($_REQUEST["detalle"])) {
@@ -19,7 +19,7 @@ if (isset($_REQUEST["detalle"])) {
     $_SESSION["paginaEnCurso"] = "detalle";
 
     // Redirigimos
-    header("Location: index.php");
+    header("Location: indexLoginLogoff.php");
     exit;
 }
 

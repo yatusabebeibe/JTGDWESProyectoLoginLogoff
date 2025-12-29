@@ -13,7 +13,7 @@ if (isset($_REQUEST["cancelar"])) {
     $_SESSION["paginaEnCurso"] = "inicioPublico";
 
     // Redirigimos
-    header("Location: index.php");
+    header("Location: indexLoginLogoff.php");
     exit;
 }
 
@@ -34,7 +34,7 @@ if (isset($_REQUEST["entrar"])) {
         $_SESSION["paginaEnCurso"] = "inicioPrivado";
 
         // Redirigimos
-        header("Location: index.php");
+        header("Location: indexLoginLogoff.php");
         exit;
     }
 }
