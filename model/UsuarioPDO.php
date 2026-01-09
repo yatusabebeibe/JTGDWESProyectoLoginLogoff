@@ -65,7 +65,7 @@ class UsuarioPDO {
 
         $parametros = [
             ":usuario" => $codUsuario ?? "",
-            ":fecha" => $fecha
+            ":fecha" => $fecha->format('Y-m-d H:i:s')
         ];
 
         $actualizacion = DBPDO::ejecutarConsulta($consulta, $parametros);
