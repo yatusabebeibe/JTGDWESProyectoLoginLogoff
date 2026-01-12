@@ -11,10 +11,7 @@
         <div class="logo">Steam</div>
         <h1 class="titulo"><?= $titulo ?></h1>
         <div class="header-actions">
-            <form id="login" action="" method="post">
-                <input type="submit" value="Iniciar sesión" name="login">
-                <input type="submit" value="Cerrar sesión" name="logoff">
-            </form>
+            <?php require_once 'view/vBotonesSesion.php'; ?>
         </div>
     </header>
     <script>
