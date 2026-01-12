@@ -50,7 +50,7 @@ class UsuarioPDO {
             self::actualizarUltimaConexion(aColumnasUsuario["Codigo"], new DateTime());
 
             // Guardamos el usuario en la sesión
-            $_SESSION["usuarioDAWJTGProyectoLoginLogoffTema5"] = $usuario;
+            $_SESSION["usuarioDAWJTGProyectoLoginLogoff"] = $usuario;
         }
 
         return isset($usuario);
