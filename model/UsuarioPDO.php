@@ -16,7 +16,7 @@ class UsuarioPDO {
      *
      * @param string $codUsuario Código del usuario a validar.
      * @param string $passwd Contraseña del usuario.
-     * @return bool Devuelve si el usuario es valido o no.
+     * @return ?Usuario Objeto Usuario si las credenciales son válidas, null en caso contrario.
      */
     public static function validarUsuario(string $codUsuario, string $passwd) {
         $consulta = <<<CONSULTA
@@ -47,13 +47,10 @@ class UsuarioPDO {
                 $oDatos->{aColumnasUsuario["Perfil"]}
             );
 
-            self::actualizarUltimaConexion($usuario->getCodUsuario(), new DateTime());
-
-            // Guardamos el usuario en la sesión
-            $_SESSION["usuarioDAWJTGProyectoLoginLogoff"] = $usuario;
+            return $usuario;
         }
 
-        return isset($usuario);
+        return null;
     }
 
     public static function actualizarUltimaConexion(string $codUsuario, DateTime $fecha) {

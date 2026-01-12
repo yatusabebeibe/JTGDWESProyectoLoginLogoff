@@ -4,6 +4,10 @@
  *  @since 16/12/2025
  */
 
+require_once 'model/DBPDO.php';
+require_once 'model/Usuario.php';
+require_once 'model/UsuarioPDO.php';
+
 $controlador = [
     "inicioPublico" => "controller/cInicioPublico.php",
     "login" => "controller/cLogin.php",

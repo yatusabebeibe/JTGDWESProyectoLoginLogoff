@@ -27,9 +27,11 @@ if (isset($_REQUEST["entrar"])) {
     $aRespuestas["usuario"] = $_REQUEST["usuario"];
     $aRespuestas["contraseña"] = $_REQUEST["contraseña"];
 
-    $usuarioValido = UsuarioPDO::validarUsuario($aRespuestas["usuario"],$aRespuestas["contraseña"]);
+    $usuario = UsuarioPDO::validarUsuario($aRespuestas["usuario"],$aRespuestas["contraseña"]);
 
-    if ($usuarioValido) {
+    if ($usuario) {
+        $_SESSION["usuarioDAWJTGProyectoLoginLogoff"] = $usuario;
+        UsuarioPDO::actualizarUltimaConexion($usuario->getCodUsuario(), new DateTime());
         $_SESSION["paginaAnterior"] = $_SESSION["paginaEnCurso"];
         $_SESSION["paginaEnCurso"] = "inicioPrivado";
 
