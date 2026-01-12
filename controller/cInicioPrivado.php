@@ -8,6 +8,7 @@ if (isset($_REQUEST["logoff"])) {
 
     $_SESSION["paginaAnterior"] = $_SESSION["paginaEnCurso"];
     $_SESSION["paginaEnCurso"] = "inicioPublico";
+    unset($_SESSION["usuarioDAWJTGProyectoLoginLogoff"]);
 
     // Redirigimos
     header("Location: indexLoginLogoff.php");
