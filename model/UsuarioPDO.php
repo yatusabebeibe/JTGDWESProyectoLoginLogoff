@@ -36,16 +36,18 @@ class UsuarioPDO {
 
         $usuario = null;
         if ($datos && $datos->rowCount() >= 1) {
-            $datos = $datos->fetchObject();
+            $oDatos = $datos->fetchObject();
             $usuario = new Usuario(
-                $datos->{aColumnasUsuario["Codigo"]},
-                $datos->{aColumnasUsuario["Password"]},
-                $datos->{aColumnasUsuario["Descripcion"]},
-                $datos->{aColumnasUsuario["NumConexiones"]} + 1,
+                $oDatos->{aColumnasUsuario["Codigo"]},
+                $oDatos->{aColumnasUsuario["Password"]},
+                $oDatos->{aColumnasUsuario["Descripcion"]},
+                $oDatos->{aColumnasUsuario["NumConexiones"]} + 1,
                 new DateTime(),
-                $datos->{aColumnasUsuario["UltimaConexion"]} ? new DateTime($datos->{aColumnasUsuario["UltimaConexion"]}) : null,
-                $datos->{aColumnasUsuario["Perfil"]}
+                $oDatos->{aColumnasUsuario["UltimaConexion"]} ? new DateTime($oDatos->{aColumnasUsuario["UltimaConexion"]}) : null,
+                $oDatos->{aColumnasUsuario["Perfil"]}
             );
+
+            self::actualizarUltimaConexion(aColumnasUsuario["Codigo"], new DateTime());
 
             // Guardamos el usuario en la sesión
             $_SESSION["usuarioDAWJTGProyectoLoginLogoffTema5"] = $usuario;
