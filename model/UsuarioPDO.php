@@ -47,7 +47,7 @@ class UsuarioPDO {
                 $oDatos->{aColumnasUsuario["Perfil"]}
             );
 
-            self::actualizarUltimaConexion(aColumnasUsuario["Codigo"], new DateTime());
+            self::actualizarUltimaConexion($usuario->getCodUsuario(), new DateTime());
 
             // Guardamos el usuario en la sesión
             $_SESSION["usuarioDAWJTGProyectoLoginLogoff"] = $usuario;
