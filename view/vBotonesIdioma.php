@@ -1,4 +1,4 @@
-<?php if ($_SESSION["paginaEnCurso"] == "inicioPublico"): ?>
+<?php if (in_array( $_SESSION["paginaEnCurso"], ["inicioPublico", "inicioPrivado"] )): ?>
 
 <form id="idiomas" action="" method="post" class="idiomas">
     <input type="radio" name="idioma" id="ES" value="ES" <?=  $_COOKIE["idioma"]=="ES" ? "checked" : "" ?>>

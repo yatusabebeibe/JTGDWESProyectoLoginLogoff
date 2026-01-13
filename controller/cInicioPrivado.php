@@ -32,25 +32,56 @@ $nombreUsuario = $usuario->getDescUsuario();
 $numConexiones = $usuario->getNumAccesos();
 $fechaUltConex = $usuario->getFechaHoraUltimaConexionAnterior() ?? null;
 
-if ($fechaUltConex) {
-    $formatter = new IntlDateFormatter(
-        'es_ES',
-        IntlDateFormatter::LONG,   // Fecha larga
-        IntlDateFormatter::SHORT,  // Hora corta
-        'Europe/Madrid',           // Zona horaria
-        IntlDateFormatter::GREGORIAN,
-        "d 'de' MMMM 'de' y 'a las' HH:mm"  // Formato personalizado
-    );
+$idiomas = ['ES' => 'es_ES', 'EN' => 'en_US', 'JP' => 'ja_JP'];
 
-    $fechaFormateada = "Usted se conectó por última vez el " . $formatter->format($fechaUltConex);
-} else {
-    $fechaFormateada = "Usted no se había conectado antes";
-}
+$traducciones = [
+    'ES' => [
+        'saludo' => 'Bienvenido',
+        'nConexiones' => 'Esta es la %ª vez que se conecta',
+        'noConectado' => 'Usted no se había conectado antes',
+        'fechaUltConex' => 'Usted se conectó por última vez el %',
+        'timezone' => 'Europe/Madrid',
+        'formatoFecha' => "d 'de' MMMM 'de' y 'a las' HH:mm"
+    ],
+    'EN' => [
+        'saludo' => 'Welcome',
+        'nConexiones' => 'This is your % time logging in',
+        'noConectado' => "You haven't logged in before",
+        'fechaUltConex' => 'Your last login was on %',
+        'timezone' => 'Europe/London',
+        'formatoFecha' => "MMMM d, y 'at' HH:mm"
+    ],
+    'JP' => [
+        'saludo' => 'ようこそ',
+        'nConexiones' => 'これは%回目のログインです',
+        'noConectado' => '以前にログインしていません',
+        'fechaUltConex' => '最後のログインは%です',
+        'timezone' => 'Asia/Tokyo',
+        'formatoFecha' => "y年M月d日 HH:mm"
+    ]
+];
+
+// Idioma desde la cookie con default
+$idioma = $_COOKIE["idioma"] ?? 'ES';
+$locale = $idiomas[$idioma] ?? $idiomas['ES'];
+
+$formatter = new IntlDateFormatter(
+    $locale,
+    IntlDateFormatter::LONG,
+    IntlDateFormatter::SHORT,
+    $traducciones[$idioma]['timezone'],
+    IntlDateFormatter::GREGORIAN,
+    $traducciones[$idioma]['formatoFecha']
+);
+
+$fechaUltConexTexto = $fechaUltConex
+    ? str_replace('%', $formatter->format($fechaUltConex), $traducciones[$idioma]['fechaUltConex'])
+    : $traducciones[$idioma]['noConectado'];
 
 $avInicioPrivado = [
-    "saludo" => "Bienvenido {$nombreUsuario}",
-    "nConexiones" => "Esta es la " . $numConexiones . "ª vez que se conecta",
-    "fechaUltConex" => $fechaFormateada
+    'saludo' => "{$traducciones[$idioma]['saludo']} {$nombreUsuario}",
+    'nConexiones' => str_replace('%', $numConexiones, $traducciones[$idioma]['nConexiones']),
+    'fechaUltConex' => $fechaUltConexTexto
 ];
 
 require_once $vista["layout"];
