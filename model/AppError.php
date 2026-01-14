@@ -2,7 +2,7 @@
 
 /**
  * @author Jesús Temprano Gallego
- * @since 18/12/2025
+ * @since 14/01/2025
  *
  * Clase que representa un error en la aplicación.
  */
@@ -28,5 +28,22 @@ class AppError {
         $this->archivoError = $archivoError;
         $this->lineaError = $lineaError;
         $this->paginaSiguiente = $paginaSiguiente;
+    }
+
+    // Getters
+    public function getCodError(): string {
+        return $this->codError;
+    }
+    public function getDescError(): string {
+        return $this->descError;
+    }
+    public function getArchivoError(): string {
+        return $this->archivoError;
+    }
+    public function getLineaError(): int {
+        return $this->lineaError;
+    }
+    public function getPaginaSiguiente(): string {
+        return $this->paginaSiguiente;
     }
 }
