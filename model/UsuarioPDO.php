@@ -53,6 +53,13 @@ class UsuarioPDO {
         return null;
     }
 
+    /**
+     * Actualiza la última conexión y el número de conexiones de un usuario en la base de datos.
+     *
+     * @param string $codUsuario Código del usuario a actualizar.
+     * @param DateTime $fecha Fecha y hora de la última conexión.
+     * @return bool true si la actualización fue exitosa, false en caso contrario.
+     */
     public static function actualizarUltimaConexion(string $codUsuario, DateTime $fecha) {
         $consulta = <<<CONSULTA
         UPDATE T01_Usuario
