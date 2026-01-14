@@ -79,5 +79,30 @@ class UsuarioPDO {
         return ($actualizacion && $actualizacion->rowCount() > 0) ? true : false ;
     }
 
+    /**
+     * Da de alta un nuevo usuario en la base de datos.
+     *
+     * @param string $codUsuario Código del nuevo usuario.
+     * @param string $nombre Nombre completo del nuevo usuario.
+     * @param string $passwd Contraseña del nuevo usuario.
+     * @return bool true si el alta fue exitosa, false en caso contrario.
+     */
+    public static function altaUsuario(string $codUsuario, string $nombre, string $passwd) {
+        $consulta = <<<CONSULTA
+        INSERT INTO T01_Usuario (T01_CodUsuario, T01_Password, T01_DescUsuario)
+        VALUES (:usuario, SHA2(:contrasenia, 256), :descripcion);
+        CONSULTA;
+
+        $parametros = [
+            ":usuario" => $codUsuario ?? "",
+            ":contrasenia" => $codUsuario.$passwd ?? "",
+            ":descripcion" => $nombre ?? ""
+        ];
+
+        $insercion = DBPDO::ejecutarConsulta($consulta, $parametros);
+
+        return ($insercion && $insercion->rowCount() > 0) ? true : false ;
+    }
+
     // public static function x() {}
 }
