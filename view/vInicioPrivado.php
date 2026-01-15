@@ -6,5 +6,6 @@
         <input type="submit" value="Detalle" name="detalle">
         <input type="submit" value="Error" name="error">
         <input type="submit" value="Mantenimiento de departamentos" name="departamentos">
+        <input type="submit" value="REST" name="REST">
     </form>
 </div>

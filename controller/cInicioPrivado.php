@@ -32,6 +32,15 @@ if (isset($_REQUEST["departamentos"])) {
     header("Location: indexLoginLogoff.php");
     exit;
 }
+if (isset($_REQUEST["REST"])) {
+
+    $_SESSION["paginaAnterior"] = $_SESSION["paginaEnCurso"];
+    $_SESSION["paginaEnCurso"] = "wip";
+
+    // Redirigimos
+    header("Location: indexLoginLogoff.php");
+    exit;
+}
 if (isset($_REQUEST["error"])) {
     DBPDO::ejecutarConsulta("SELECT * FROM xsghuh");
 }
