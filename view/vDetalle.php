@@ -42,4 +42,5 @@
     body { background: var(--color-bg-body); }
     a:link{ color: var(--color-primary); text-decoration: unset; background-color: unset; }
     th { top: 67px; }
+    @media (prefers-color-scheme: light) { body { color: #E2E4EF; } table { color: #222;} }
 </style>
