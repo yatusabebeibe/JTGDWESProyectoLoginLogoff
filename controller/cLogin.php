@@ -6,7 +6,7 @@
 
 require_once __DIR__ . '/../model/UsuarioPDO.php';
 
-// Comprobamos si se ha pulsado el botón 'cancelar'
+// Si se ha pulsado el botón de cancelar, redirigimos al inicio público
 if (isset($_REQUEST["cancelar"])) {
 
     $_SESSION["paginaAnterior"] = $_SESSION["paginaEnCurso"];
@@ -21,7 +21,7 @@ $encontrado = false; // Variable que indicará si se ha encontrado el usuario
 $aRespuestas = ["usuario"=>"","contraseña"=>""]; // Array para almacenar los datos del usuario
 $aErrores = ["login"=>""]; // Array para almacenar el mensaje errores en el login
 
-// Comprobamos si se ha pulsado el botón 'entrar'
+// Si se ha pulsado el botón de entrar, validamos el usuario
 if (isset($_REQUEST["entrar"])) {
 
     $aRespuestas["usuario"] = $_REQUEST["usuario"];
@@ -29,6 +29,7 @@ if (isset($_REQUEST["entrar"])) {
 
     $usuario = UsuarioPDO::validarUsuario($aRespuestas["usuario"],$aRespuestas["contraseña"]);
 
+    // Si el usuario es correcto, lo almacenamos en la sesión y redirigimos al inicio privado
     if ($usuario) {
         $_SESSION["usuarioDAWJTGProyectoLoginLogoff"] = $usuario;
         UsuarioPDO::actualizarUltimaConexion($usuario->getCodUsuario(), new DateTime());

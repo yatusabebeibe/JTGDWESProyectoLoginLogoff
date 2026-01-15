@@ -19,7 +19,7 @@ if (isset($_REQUEST["cancelar"])) {
 
 $sErrorRegistro = "";
 
-// Comprobamos si se ha pulsado el botón 'aceptar'
+// Si se ha pulsado el botón de aceptar, validamos el formulario
 if (isset($_REQUEST["aceptar"])) {
 
     $sErrorRegistro =  validacionFormularios::comprobarAlfaNumerico($_REQUEST["usuario"], 10, 4, 1);
@@ -32,7 +32,7 @@ if (isset($_REQUEST["aceptar"])) {
 
         // Comprobamos si las contraseñas coinciden
         if ($_REQUEST["contraseña1"] === $_REQUEST["contraseña2"]) {
-            // Creamos el nuevo usuario
+            // Si el alta es correcta, redirigimos al inicio público
             if (UsuarioPDO::altaUsuario($_REQUEST["usuario"], $_REQUEST["nombre"], $_REQUEST["contraseña1"])) {
                 $_SESSION["paginaAnterior"] = $_SESSION["paginaEnCurso"];
                 $_SESSION["paginaEnCurso"] = "inicioPublico";

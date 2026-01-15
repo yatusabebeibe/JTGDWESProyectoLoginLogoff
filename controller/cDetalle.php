@@ -14,6 +14,7 @@ if (! isset($_SESSION["usuarioDAWJTGProyectoLoginLogoff"])) {
     exit;
 }
 
+// Si se ha pulsado el botón de logoff, cerramos la sesión y redirigimos al inicio público
 if (isset($_REQUEST["logoff"])) {
 
     $_SESSION["paginaAnterior"] = $_SESSION["paginaEnCurso"];
@@ -25,6 +26,7 @@ if (isset($_REQUEST["logoff"])) {
     exit;
 }
 
+// Si se ha pulsado el botón de volver, redirigimos a la página de detalle
 if (isset($_REQUEST["volver"])) {
 
     $_SESSION["paginaEnCurso"] = $_SESSION["paginaAnterior"];

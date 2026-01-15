@@ -4,6 +4,7 @@
  *  @since 16/12/2025
  */
 
+// Login
 if (isset($_REQUEST["login"])) {
 
     $_SESSION["paginaAnterior"] = $_SESSION["paginaEnCurso"];
@@ -13,6 +14,7 @@ if (isset($_REQUEST["login"])) {
     header("Location: indexLoginLogoff.php");
     exit;
 }
+// Registro
 if (isset($_REQUEST["register"])) {
 
     $_SESSION["paginaAnterior"] = $_SESSION["paginaEnCurso"];

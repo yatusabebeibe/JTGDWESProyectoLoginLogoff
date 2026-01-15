@@ -5,9 +5,8 @@
  * @since 15/01/2026
  */
 
-
+// Si se ha pulsado el botón de volver, redirigimos a la página anterior
 if(isset($_REQUEST['volver'])){
-    // Si se pulsa le damos el valor de la página solicitada a la variable $_SESSION.
     $_SESSION['paginaEnCurso'] = $_SESSION['paginaAnterior'];
     header('Location: indexLoginLogoff.php');
     exit;

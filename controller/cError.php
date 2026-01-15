@@ -5,17 +5,18 @@
  * @since 15/01/2026
  */
 
+// Si se ha pulsado el botón de volver, limpiamos el error y redirigimos a la página anterior
 if(isset($_REQUEST['volver'])){
 
     // Limpiamos el error de la sesión
     unset($_SESSION['error']);
 
-    // Si se pulsa le damos el valor de la página solicitada a la variable $_SESSION.
     $_SESSION['paginaEnCurso'] = $_SESSION['paginaAnterior'];
     header('Location: indexLoginLogoff.php');
     exit;
 }
 
+// Array para pasar a la vista
 $avError = [
     'codError' => '',
     'descError' => '',

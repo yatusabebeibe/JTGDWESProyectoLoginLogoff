@@ -13,6 +13,8 @@ if (! isset($_SESSION["usuarioDAWJTGProyectoLoginLogoff"])) {
     header("Location: indexLoginLogoff.php");
     exit;
 }
+
+// Si se ha pulsado el botón de logoff, cerramos la sesión y redirigimos al inicio público
 if (isset($_REQUEST["logoff"])) {
 
     $_SESSION["paginaAnterior"] = $_SESSION["paginaEnCurso"];
@@ -23,6 +25,7 @@ if (isset($_REQUEST["logoff"])) {
     header("Location: indexLoginLogoff.php");
     exit;
 }
+// Detalle
 if (isset($_REQUEST["detalle"])) {
 
     $_SESSION["paginaAnterior"] = $_SESSION["paginaEnCurso"];
@@ -32,6 +35,7 @@ if (isset($_REQUEST["detalle"])) {
     header("Location: indexLoginLogoff.php");
     exit;
 }
+// Mantenimiento de departamentos
 if (isset($_REQUEST["departamentos"])) {
 
     $_SESSION["paginaAnterior"] = $_SESSION["paginaEnCurso"];
@@ -41,6 +45,7 @@ if (isset($_REQUEST["departamentos"])) {
     header("Location: indexLoginLogoff.php");
     exit;
 }
+// REST
 if (isset($_REQUEST["REST"])) {
 
     $_SESSION["paginaAnterior"] = $_SESSION["paginaEnCurso"];
@@ -50,20 +55,25 @@ if (isset($_REQUEST["REST"])) {
     header("Location: indexLoginLogoff.php");
     exit;
 }
+// Forzamos un error para probar el manejo de errores
 if (isset($_REQUEST["error"])) {
     DBPDO::ejecutarConsulta("SELECT * FROM xsghuh");
 }
 
 $titulo = "Inicio Privado";
 
+
+// traducimos y preparamos los datos para la vista
+
+// Obtenemos los datos del usuario logueado
 $usuario = $_SESSION["usuarioDAWJTGProyectoLoginLogoff"];
 
 $nombreUsuario = $usuario->getDescUsuario();
 $numConexiones = $usuario->getNumAccesos();
 $fechaUltConex = $usuario->getFechaHoraUltimaConexionAnterior() ?? null;
 
+// Arrays de idiomas y traducciones
 $idiomas = ['ES' => 'es_ES', 'EN' => 'en_US', 'JP' => 'ja_JP'];
-
 $traducciones = [
     'ES' => [
         'saludo' => 'Bienvenido',
@@ -91,9 +101,10 @@ $traducciones = [
     ]
 ];
 
-// Idioma desde la cookie con default
-$idioma = $_COOKIE["idioma"] ?? 'ES';
-$locale = $idiomas[$idioma] ?? $idiomas['ES'];
+// Si el idioma guardado en la cookie existe en el array $idiomas se usa; si no, se establece 'ES' como idioma por defecto
+$idioma = isset($idiomas[$_COOKIE["idioma"]]) ? $_COOKIE["idioma"] : 'ES';
+// Se obtiene el locale correspondiente al idioma ya validado
+$locale = $idiomas[$idioma];
 
 $formatter = new IntlDateFormatter(
     $locale,
@@ -104,10 +115,12 @@ $formatter = new IntlDateFormatter(
     $traducciones[$idioma]['formatoFecha']
 );
 
+// Formateamos la fecha de la última conexión o mostramos el texto de no conectado anteriormente
 $fechaUltConexTexto = $fechaUltConex
     ? str_replace('%', $formatter->format($fechaUltConex), $traducciones[$idioma]['fechaUltConex'])
     : $traducciones[$idioma]['noConectado'];
 
+// Array para pasar a la vista
 $avInicioPrivado = [
     'saludo' => "{$traducciones[$idioma]['saludo']} {$nombreUsuario}",
     'nConexiones' => str_replace('%', $numConexiones, $traducciones[$idioma]['nConexiones']),
