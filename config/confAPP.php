@@ -9,6 +9,7 @@ require_once 'core/231018libreriaValidacion.php';
 require_once 'model/DBPDO.php';
 require_once 'model/Usuario.php';
 require_once 'model/UsuarioPDO.php';
+require_once 'model/AppError.php';
 
 $controlador = [
     "inicioPublico" => "controller/cInicioPublico.php",
@@ -17,6 +18,7 @@ $controlador = [
     "detalle" => "controller/cDetalle.php",
     "registro" => "controller/cRegistro.php",
     "wip" => "controller/cWIP.php",
+    "error" => "controller/cError.php",
 ];
 
 $vista = [
@@ -27,4 +29,5 @@ $vista = [
     "detalle" => "view/vDetalle.php",
     "registro" => "view/vRegistro.php",
     "wip" => "view/vWIP.php",
+    "error" => "view/vError.php",
 ];

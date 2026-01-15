@@ -32,6 +32,16 @@ if (isset($_REQUEST["departamentos"])) {
     header("Location: indexLoginLogoff.php");
     exit;
 }
+if (isset($_REQUEST["error"])) {
+    if (! DBPDO::ejecutarConsulta("SELECT * FROM x")) {
+        $_SESSION["paginaAnterior"] = $_SESSION["paginaEnCurso"];
+        $_SESSION["paginaEnCurso"] = "error";
+
+        // Redirigimos
+        header("Location: indexLoginLogoff.php");
+        exit;
+    }
+}
 
 $titulo = "Inicio Privado";
 

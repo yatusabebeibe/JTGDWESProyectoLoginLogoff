@@ -14,7 +14,7 @@ class DBPDO {
      * @param array $parametros Array con los parámetros para la sentencia SQL.
      * @return PDOStatement|false Devuelve el objeto PDOStatement si la ejecución es correcta, o false si hay error.
      */
-    public static function ejecutarConsulta(string $sentenciaSQL, array $parametros) {
+    public static function ejecutarConsulta(string $sentenciaSQL, array $parametros = []) {
         try {
             $miDB = new PDO(DSN, DBUser, DBPass);
 
@@ -24,7 +24,15 @@ class DBPDO {
 
             return $consulta;
 
-        } catch (PDOException $error) {
+        } catch (PDOException $exception) {
+            $error = new AppError(
+                $exception->getCode(),
+                $exception->getMessage(),
+                $exception->getFile(),
+                $exception->getLine(),
+                $_SESSION['paginaEnCurso']
+            );
+            $_SESSION['error'] = $error;
             return false;
         }
     }
