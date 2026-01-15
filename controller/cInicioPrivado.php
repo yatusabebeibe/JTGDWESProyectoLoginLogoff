@@ -23,6 +23,15 @@ if (isset($_REQUEST["detalle"])) {
     header("Location: indexLoginLogoff.php");
     exit;
 }
+if (isset($_REQUEST["departamentos"])) {
+
+    $_SESSION["paginaAnterior"] = $_SESSION["paginaEnCurso"];
+    $_SESSION["paginaEnCurso"] = "wip";
+
+    // Redirigimos
+    header("Location: indexLoginLogoff.php");
+    exit;
+}
 
 $titulo = "Inicio Privado";
 

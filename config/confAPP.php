@@ -16,6 +16,7 @@ $controlador = [
     "inicioPrivado" => "controller/cInicioPrivado.php",
     "detalle" => "controller/cDetalle.php",
     "registro" => "controller/cRegistro.php",
+    "wip" => "controller/cWIP.php",
 ];
 
 $vista = [
@@ -25,4 +26,5 @@ $vista = [
     "inicioPrivado" => "view/vInicioPrivado.php",
     "detalle" => "view/vDetalle.php",
     "registro" => "view/vRegistro.php",
+    "wip" => "view/vWIP.php",
 ];
