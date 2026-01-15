@@ -13,6 +13,15 @@ if (isset($_REQUEST["login"])) {
     header("Location: indexLoginLogoff.php");
     exit;
 }
+if (isset($_REQUEST["register"])) {
+
+    $_SESSION["paginaAnterior"] = $_SESSION["paginaEnCurso"];
+    $_SESSION["paginaEnCurso"] = "registro";
+
+    // Redirigimos
+    header("Location: indexLoginLogoff.php");
+    exit;
+}
 
 $titulo = "Inicio Publico";
 
