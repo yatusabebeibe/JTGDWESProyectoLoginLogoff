@@ -16,7 +16,7 @@ class UsuarioPDO {
      *
      * @param string $codUsuario Código del usuario a validar.
      * @param string $passwd Contraseña del usuario.
-     * @return bool Devuelve si el usuario es valido o no.
+     * @return ?Usuario Objeto Usuario si las credenciales son válidas, null en caso contrario.
      */
     public static function validarUsuario(string $codUsuario, string $passwd) {
         $consulta = <<<CONSULTA
@@ -36,24 +36,30 @@ class UsuarioPDO {
 
         $usuario = null;
         if ($datos && $datos->rowCount() >= 1) {
-            $datos = $datos->fetchObject();
+            $oDatos = $datos->fetchObject();
             $usuario = new Usuario(
-                $datos->{aColumnasUsuario["Codigo"]},
-                $datos->{aColumnasUsuario["Password"]},
-                $datos->{aColumnasUsuario["Descripcion"]},
-                $datos->{aColumnasUsuario["NumConexiones"]} + 1,
+                $oDatos->{aColumnasUsuario["Codigo"]},
+                $oDatos->{aColumnasUsuario["Password"]},
+                $oDatos->{aColumnasUsuario["Descripcion"]},
+                $oDatos->{aColumnasUsuario["NumConexiones"]} + 1,
                 new DateTime(),
-                $datos->{aColumnasUsuario["UltimaConexion"]} ? new DateTime($datos->{aColumnasUsuario["UltimaConexion"]}) : null,
-                $datos->{aColumnasUsuario["Perfil"]}
+                $oDatos->{aColumnasUsuario["UltimaConexion"]} ? new DateTime($oDatos->{aColumnasUsuario["UltimaConexion"]}) : null,
+                $oDatos->{aColumnasUsuario["Perfil"]}
             );
 
-            // Guardamos el usuario en la sesión
-            $_SESSION["usuarioDAWJTGProyectoLoginLogoffTema5"] = $usuario;
+            return $usuario;
         }
 
-        return isset($usuario);
+        return null;
     }
 
+    /**
+     * Actualiza la última conexión y el número de conexiones de un usuario en la base de datos.
+     *
+     * @param string $codUsuario Código del usuario a actualizar.
+     * @param DateTime $fecha Fecha y hora de la última conexión.
+     * @return bool true si la actualización fue exitosa, false en caso contrario.
+     */
     public static function actualizarUltimaConexion(string $codUsuario, DateTime $fecha) {
         $consulta = <<<CONSULTA
         UPDATE T01_Usuario
@@ -65,12 +71,37 @@ class UsuarioPDO {
 
         $parametros = [
             ":usuario" => $codUsuario ?? "",
-            ":fecha" => $fecha
+            ":fecha" => $fecha->format('Y-m-d H:i:s')
         ];
 
         $actualizacion = DBPDO::ejecutarConsulta($consulta, $parametros);
 
         return ($actualizacion && $actualizacion->rowCount() > 0) ? true : false ;
+    }
+
+    /**
+     * Da de alta un nuevo usuario en la base de datos.
+     *
+     * @param string $codUsuario Código del nuevo usuario.
+     * @param string $nombre Nombre completo del nuevo usuario.
+     * @param string $passwd Contraseña del nuevo usuario.
+     * @return bool true si el alta fue exitosa, false en caso contrario.
+     */
+    public static function altaUsuario(string $codUsuario, string $nombre, string $passwd) {
+        $consulta = <<<CONSULTA
+        INSERT INTO T01_Usuario (T01_CodUsuario, T01_Password, T01_DescUsuario)
+        VALUES (:usuario, SHA2(:contrasenia, 256), :descripcion);
+        CONSULTA;
+
+        $parametros = [
+            ":usuario" => $codUsuario ?? "",
+            ":contrasenia" => $codUsuario.$passwd ?? "",
+            ":descripcion" => $nombre ?? ""
+        ];
+
+        $insercion = DBPDO::ejecutarConsulta($consulta, $parametros);
+
+        return ($insercion && $insercion->rowCount() > 0) ? true : false ;
     }
 
     // public static function x() {}

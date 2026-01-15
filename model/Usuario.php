@@ -43,4 +43,25 @@ class Usuario {
         $this->fechaHoraUltimaConexionAnterior = $fechaHoraUltimaConexionAnterior;
         $this->perfil = $perfil;
     }
+
+    // getter methods
+    public function getCodUsuario(): string {
+        return $this->codUsuario;
+    }
+    public function getDescUsuario(): string {
+        return $this->descUsuario;
+    }
+    public function getNumAccesos(): int {
+        return $this->numAccesos;
+    }
+    public function getFechaHoraUltimaConexion(): DateTime {
+        return $this->fechaHoraUltimaConexion;
+    }
+    public function getFechaHoraUltimaConexionAnterior(): ?DateTime {
+        return $this->fechaHoraUltimaConexionAnterior;
+    }
+    public function getPerfil(): string {
+        return $this->perfil;
+    }
+
 }

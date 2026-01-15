@@ -12,9 +12,9 @@ class DBPDO {
      *
      * @param string $sentenciaSQL La sentencia SQL a ejecutar.
      * @param array $parametros Array con los parámetros para la sentencia SQL.
-     * @return PDOStatement|false Devuelve el objeto PDOStatement si la ejecución es correcta, o false si hay error.
+     * @return PDOStatement Devuelve el objeto PDOStatement de la consulta.
      */
-    public static function ejecutarConsulta(string $sentenciaSQL, array $parametros) {
+    public static function ejecutarConsulta(string $sentenciaSQL, array $parametros = []) {
         try {
             $miDB = new PDO(DSN, DBUser, DBPass);
 
@@ -24,8 +24,20 @@ class DBPDO {
 
             return $consulta;
 
-        } catch (PDOException $error) {
-            return false;
+        } catch (PDOException $exception) {
+            $_SESSION['error'] = new AppError(
+                $exception->getCode(),
+                $exception->getMessage(),
+                $exception->getFile(),
+                $exception->getLine(),
+                $_SESSION['paginaEnCurso']
+            );
+            $_SESSION["paginaAnterior"] = $_SESSION["paginaEnCurso"];
+            $_SESSION["paginaEnCurso"] = "error";
+
+            // Redirigimos
+            header("Location: indexLoginLogoff.php");
+            exit;
         }
     }
 }
