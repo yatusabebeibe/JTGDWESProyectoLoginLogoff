@@ -4,6 +4,15 @@
  *  @since 16/12/2025
  */
 
+// Si no hay un usuario logueado, redirigimos al login
+if (! isset($_SESSION["usuarioDAWJTGProyectoLoginLogoff"])) {
+    $_SESSION["paginaAnterior"] = $_SESSION["paginaEnCurso"];
+    $_SESSION["paginaEnCurso"] = "login";
+
+    // Redirigimos
+    header("Location: indexLoginLogoff.php");
+    exit;
+}
 if (isset($_REQUEST["logoff"])) {
 
     $_SESSION["paginaAnterior"] = $_SESSION["paginaEnCurso"];
