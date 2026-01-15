@@ -33,14 +33,7 @@ if (isset($_REQUEST["departamentos"])) {
     exit;
 }
 if (isset($_REQUEST["error"])) {
-    if (! DBPDO::ejecutarConsulta("SELECT * FROM x")) {
-        $_SESSION["paginaAnterior"] = $_SESSION["paginaEnCurso"];
-        $_SESSION["paginaEnCurso"] = "error";
-
-        // Redirigimos
-        header("Location: indexLoginLogoff.php");
-        exit;
-    }
+    DBPDO::ejecutarConsulta("SELECT * FROM xsghuh");
 }
 
 $titulo = "Inicio Privado";

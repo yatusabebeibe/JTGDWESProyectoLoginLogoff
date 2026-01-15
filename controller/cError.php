@@ -6,6 +6,10 @@
  */
 
 if(isset($_REQUEST['volver'])){
+
+    // Limpiamos el error de la sesión
+    unset($_SESSION['error']);
+
     // Si se pulsa le damos el valor de la página solicitada a la variable $_SESSION.
     $_SESSION['paginaEnCurso'] = $_SESSION['paginaAnterior'];
     header('Location: indexLoginLogoff.php');
@@ -29,7 +33,6 @@ if (isset($_SESSION['error'])) {
         'lineaError' => $oError->getLineaError(),
         'paginaSiguiente' => $oError->getPaginaSiguiente()
     ];
-    unset($_SESSION['error']);
 }
 
 $titulo = "Error {$avError['codError']}";
